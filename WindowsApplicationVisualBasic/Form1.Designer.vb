@@ -35,6 +35,7 @@ Partial Class Form1
         Me.NodeBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PipeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Button4 = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -50,38 +51,37 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 145)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.Label1.Location = New System.Drawing.Point(3, 75)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(0, 25)
+        Me.Label1.Size = New System.Drawing.Size(0, 13)
         Me.Label1.TabIndex = 0
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(4, 4)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button1.Location = New System.Drawing.Point(8, 11)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(184, 137)
+        Me.Button1.Size = New System.Drawing.Size(92, 71)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "Save"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(196, 4)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button2.Location = New System.Drawing.Point(104, 11)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(184, 137)
+        Me.Button2.Size = New System.Drawing.Size(92, 71)
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "Load"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(388, 4)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
+        Me.Button3.Location = New System.Drawing.Point(200, 11)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(184, 137)
+        Me.Button3.Size = New System.Drawing.Size(92, 71)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Original"
         Me.Button3.UseVisualStyleBackColor = True
@@ -90,7 +90,7 @@ Partial Class Form1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -102,8 +102,9 @@ Partial Class Form1
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.Map)
-        Me.SplitContainer1.Size = New System.Drawing.Size(2946, 1421)
-        Me.SplitContainer1.SplitterDistance = 1014
+        Me.SplitContainer1.Size = New System.Drawing.Size(1473, 739)
+        Me.SplitContainer1.SplitterDistance = 507
+        Me.SplitContainer1.SplitterWidth = 2
         Me.SplitContainer1.TabIndex = 5
         '
         'DataGridView1
@@ -111,32 +112,34 @@ Partial Class Form1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.DataGridView1.RowTemplate.Height = 33
-        Me.DataGridView1.Size = New System.Drawing.Size(1014, 1421)
+        Me.DataGridView1.Size = New System.Drawing.Size(507, 739)
         Me.DataGridView1.TabIndex = 4
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(48, 418)
+        Me.PictureBox1.Location = New System.Drawing.Point(24, 217)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
+        Me.PictureBox1.Size = New System.Drawing.Size(50, 26)
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
         '
         'Map
         '
+        Me.Map.Controls.Add(Me.Button4)
         Me.Map.Controls.Add(Me.Button3)
         Me.Map.Controls.Add(Me.Label1)
-        Me.Map.Controls.Add(Me.Button1)
         Me.Map.Controls.Add(Me.Button2)
+        Me.Map.Controls.Add(Me.Button1)
         Me.Map.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Map.Location = New System.Drawing.Point(0, 0)
-        Me.Map.Margin = New System.Windows.Forms.Padding(4)
+        Me.Map.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Map.Name = "Map"
-        Me.Map.Size = New System.Drawing.Size(1928, 1421)
+        Me.Map.Size = New System.Drawing.Size(964, 739)
         Me.Map.TabIndex = 0
         '
         'NodeBindingSource
@@ -155,15 +158,23 @@ Partial Class Form1
         '
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(245, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(297, 11)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(92, 69)
+        Me.Button4.TabIndex = 4
+        Me.Button4.Text = "New Map"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(2946, 1421)
+        Me.ClientSize = New System.Drawing.Size(1473, 739)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.Margin = New System.Windows.Forms.Padding(6)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -193,4 +204,5 @@ Partial Class Form1
     Friend WithEvents PipeBindingSource As BindingSource
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents Button4 As Button
 End Class

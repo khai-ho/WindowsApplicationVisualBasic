@@ -14,6 +14,7 @@ Public Class Form1
     Private FrameLength = 0.1R, ZoomFactor = 0.9R
     Private bindingSource1 As BindingSource
 
+
     Private Sub printText(str As String)
         Label1.Text += str & vbCrLf
     End Sub
@@ -28,6 +29,7 @@ Public Class Form1
             'MessageBox.Show("Saved")
         End If
     End Sub
+
     Private Sub Button2_MouseClick(sender As Object, e As MouseEventArgs) Handles Button2.MouseClick
         Dim network As New Network
         Dim xmlSerializer As XmlSerializer = New XmlSerializer(network.GetType)
@@ -42,6 +44,7 @@ Public Class Form1
         'MessageBox.Show("Loaded")
         readStream.Close()
     End Sub
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         Dim nodes = New List(Of Node) From {
@@ -59,6 +62,15 @@ Public Class Form1
         'MessageBox.Show("Original")
         Map.Invalidate()
     End Sub
+
+    Private Sub Button4_MouseClick(sender As Object, e As MouseEventArgs) Handles Button4.MouseClick
+        If network1 IsNot Nothing Then
+            Dim mapUC As New MapEventsForm
+            mapUC.createForm()
+            mapUC.MapEventsUserControl1.createUserControl(network1)
+        End If
+    End Sub
+
     Private Sub SplitContainer1_Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Map.Paint
         If (Not (network1 Is Nothing)) Then
             Dim DX, Dy As Double
@@ -77,6 +89,7 @@ Public Class Form1
             network1.draw(e.Graphics)
         End If
     End Sub
+
     Private Sub SplitContainer1_SizeChanged(sender As Object, e As EventArgs) Handles Map.SizeChanged
         MapHeight = Map.ClientSize.Height
         MapWidth = Map.ClientSize.Width
@@ -92,7 +105,6 @@ Public Class Form1
         Map.Invalidate()
     End Sub
 
-
     Private Sub Map_MouseDown(sender As Object, e As MouseEventArgs) Handles Map.MouseDown
         Dim g = Map.CreateGraphics
         If netObj IsNot Nothing AndAlso Not (netObj.mouseOnObject(e.Location)) Then
@@ -102,7 +114,7 @@ Public Class Form1
         End If
 
         If (network1 IsNot Nothing) Then
-            mouseClickPosition = Network.DSPToGEO(New Point(e.X, e.Y))
+            mouseClickPosition = network1.DSPToGEO(New Point(e.X, e.Y))
             For Each obj In network1.GetNetObj
                 If obj.mouseOnObject(e.Location) Then
                     obj.color = Color.Magenta
@@ -116,6 +128,7 @@ Public Class Form1
 
 
     End Sub
+
     Private Sub Map_MouseWheel(sender As Object, e As MouseEventArgs) Handles Map.MouseWheel
         mousePlacement.X = (e.X - Network.XOFF) / Network.XSCALE
         mousePlacement.Y = (e.Y - Network.YOFF) / Network.YSCALE
@@ -141,6 +154,7 @@ Public Class Form1
         End If
         Map.Invalidate()
     End Sub
+
     Private Sub Map_MouseMove(sender As Object, e As MouseEventArgs) Handles Map.MouseMove
         Dim g = Map.CreateGraphics
         If (network1 IsNot Nothing) Then
@@ -165,6 +179,8 @@ Public Class Form1
             End If
         End If
     End Sub
+
+
     Private Sub Map_MouseClick(sender As Object, e As MouseEventArgs) Handles Map.MouseClick
 
         If network1 IsNot Nothing AndAlso e.Button = MouseButtons.Left Then
@@ -198,8 +214,8 @@ Public Class Form1
         '
         If netObj IsNot Nothing AndAlso e.Button = MouseButtons.Right AndAlso (netObj.mouseOnObject(e.Location)) Then
             createRightClickContextMenu(netObj)
+            printText("Hello")
         End If
-
     End Sub
 
     Private Sub DataGridView1_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseDown
@@ -238,6 +254,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
     Sub propertiesItem(sender As Object, e As MouseEventArgs)
         Dim item = TryCast(sender, ToolStripItem)
         If item IsNot Nothing Then
@@ -248,6 +265,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
     Sub createRightClickContextMenu(obj As NetworkObj)
         Dim attrlist As List(Of PlottingAttribute) = obj.getPlotAttrlist(obj)
         ContextMenuStrip1.Items.Clear()
@@ -278,4 +296,6 @@ Public Class Form1
             propertyForm.createForm(obj)
         End If
     End Sub
+
 End Class
+

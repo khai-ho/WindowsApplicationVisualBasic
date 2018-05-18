@@ -80,6 +80,18 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MapEventsForm.Designer.vb">
+      <DependentUpon>MapEventsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MapEventsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapEventsUserControl.Designer.vb">
+      <DependentUpon>MapEventsUserControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MapEventsUserControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -109,6 +121,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapEventsForm.resx">
+      <DependentUpon>MapEventsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapEventsUserControl.resx">
+      <DependentUpon>MapEventsUserControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
