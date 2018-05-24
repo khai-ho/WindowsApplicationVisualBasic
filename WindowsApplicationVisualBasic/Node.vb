@@ -8,7 +8,7 @@ Public Class Node
 
     Private pressure, elevation, diameter As Double
     Private xCoordinate, yCoordinate As Double
-
+#Region "Private Members Getters Setters"
     <XmlAttribute("nodePressure")>
     <DisplayName("Pressure")>
     <propertySorting(3)>
@@ -75,6 +75,8 @@ Public Class Node
             yCoordinate = value
         End Set
     End Property
+#End Region
+
     Public Sub New()
     End Sub
     Public Sub New(node_name As String, node_nr As Int32, node_flowRate As Double, node_pressure As Double, node_xCoordinate As Int32, node_yCoordinate As Int32, node_elevation As Double)
@@ -114,7 +116,6 @@ Public Class Node
         xCoordinate = p.X
         yCoordinate = p.Y
     End Sub
-
 
 
 End Class

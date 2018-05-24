@@ -67,7 +67,7 @@ Public Class Form1
         If network1 IsNot Nothing Then
             Dim mapUC As New MapEventsForm
             mapUC.createForm()
-            mapUC.MapEventsUserControl1.createUserControl(network1)
+            mapUC.MapEventsUserControl2.createUserControl(network1)
         End If
     End Sub
 
@@ -86,6 +86,7 @@ Public Class Form1
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
             e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
             e.Graphics.PageUnit = GraphicsUnit.Pixel
+
             network1.draw(e.Graphics)
         End If
     End Sub
@@ -107,12 +108,15 @@ Public Class Form1
 
     Private Sub Map_MouseDown(sender As Object, e As MouseEventArgs) Handles Map.MouseDown
         Dim g = Map.CreateGraphics
+
+        'Unmark objects in map
         If netObj IsNot Nothing AndAlso Not (netObj.mouseOnObject(e.Location)) Then
             currentActivity = "nothing"
             netObj.color = Color.Black
             Map.Invalidate()
         End If
 
+        'Mark objects in map
         If (network1 IsNot Nothing) Then
             mouseClickPosition = network1.DSPToGEO(New Point(e.X, e.Y))
             For Each obj In network1.GetNetObj
@@ -125,8 +129,6 @@ Public Class Form1
                 End If
             Next
         End If
-
-
     End Sub
 
     Private Sub Map_MouseWheel(sender As Object, e As MouseEventArgs) Handles Map.MouseWheel
@@ -158,6 +160,7 @@ Public Class Form1
     Private Sub Map_MouseMove(sender As Object, e As MouseEventArgs) Handles Map.MouseMove
         Dim g = Map.CreateGraphics
         If (network1 IsNot Nothing) Then
+            'Move map
             If (e.Button = MouseButtons.Left) And currentActivity = "nothing" Then
                 mousePlacement.X = (e.X - Network.XOFF) / Network.XSCALE
                 mousePlacement.Y = (e.Y - Network.YOFF) / Network.YSCALE
@@ -171,6 +174,8 @@ Public Class Form1
                 Network.YMAX += mouseDisp.Y
                 Map.Invalidate()
             End If
+
+            'Move object
             If (e.Button = MouseButtons.Left) And currentActivity = "movement" Then
                 mousePlacement.X = (e.X - Network.XOFF) / Network.XSCALE
                 mousePlacement.Y = (e.Y - Network.YOFF) / Network.YSCALE
@@ -180,9 +185,13 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
 
     Private Sub Map_MouseClick(sender As Object, e As MouseEventArgs) Handles Map.MouseClick
 
+        'Left Click on NetObject in map to bring up DataGridView
         If network1 IsNot Nothing AndAlso e.Button = MouseButtons.Left Then
             DataGridView1.Columns.Clear()
 
@@ -211,7 +220,7 @@ Public Class Form1
             DataGridView1.DataSource = dgvBindSource
         End If
 
-        '
+        'Right Click on Object in map to bring up ContextMenu
         If netObj IsNot Nothing AndAlso e.Button = MouseButtons.Right AndAlso (netObj.mouseOnObject(e.Location)) Then
             createRightClickContextMenu(netObj)
             printText("Hello")
@@ -220,6 +229,7 @@ Public Class Form1
 
     Private Sub DataGridView1_CellMouseDown(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseDown
 
+        'Left click on netObject in DataGridView to mark
         If e.Button = MouseButtons.Left Then
             Dim g = Map.CreateGraphics
             Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
@@ -232,6 +242,7 @@ Public Class Form1
             End If
         End If
 
+        'Right click in DataGridView to bring up ContextMenu
         If e.Button = MouseButtons.Right Then
             Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
             Dim obj As NetworkObj = TryCast(selectedRow.DataBoundItem, NetworkObj)
@@ -242,6 +253,8 @@ Public Class Form1
     End Sub
 
     Sub helloWorld(sender As Object, e As MouseEventArgs)
+
+        '
         If e.Button = MouseButtons.Left Then
             Dim item = TryCast(sender, ToolStripItem)
             If item IsNot Nothing Then
@@ -266,6 +279,27 @@ Public Class Form1
         End If
     End Sub
 
+    Sub netObjDataGrid(sender As Object, e As MouseEventArgs)
+
+        If network1 IsNot Nothing Then
+            Dim item = TryCast(sender, ToolStripItem)
+            If item IsNot Nothing Then
+                Dim obj = TryCast(item.Tag, NetworkObj)
+                If obj IsNot Nothing Then
+
+                    Dim newGridUserControl As New GridView(network1, obj)
+
+                    Dim newForm As New Form
+
+                    newForm.Controls.Add(newGridUserControl)
+                    newGridUserControl.Dock = DockStyle.Fill
+                    newForm.Show()
+                End If
+            End If
+        End If
+
+    End Sub
+
     Sub createRightClickContextMenu(obj As NetworkObj)
         Dim attrlist As List(Of PlottingAttribute) = obj.getPlotAttrlist(obj)
         ContextMenuStrip1.Items.Clear()
@@ -275,9 +309,12 @@ Public Class Form1
             item.Tag = attr
             AddHandler item.MouseDown, AddressOf helloWorld
         Next
-        Dim item2 = ContextMenuStrip1.Items.Add("Properties")
+        Dim item2 = ContextMenuStrip1.Items.Add("View Data Grid")
         item2.Tag = obj
-        AddHandler item2.MouseDown, AddressOf propertiesItem
+        AddHandler item2.MouseDown, AddressOf netObjDataGrid
+        Dim item3 = ContextMenuStrip1.Items.Add("Properties")
+        item3.Tag = obj
+        AddHandler item3.MouseDown, AddressOf propertiesItem
         ContextMenuStrip1.Show(Form1.MousePosition)
     End Sub
 
@@ -297,5 +334,17 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub Button5_MouseClick(sender As Object, e As MouseEventArgs) Handles Button5.MouseClick
+        If network1 IsNot Nothing Then
+            Dim newForm As New Form
+
+            Dim newGridUserControl As New GridView(network1)
+
+            newForm.Controls.Add(newGridUserControl)
+            newGridUserControl.Dock = DockStyle.Fill
+
+            newForm.Show()
+        End If
+    End Sub
 End Class
 

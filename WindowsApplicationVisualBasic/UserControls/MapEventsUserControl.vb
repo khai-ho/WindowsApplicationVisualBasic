@@ -17,13 +17,41 @@ Public Class MapEventsUserControl
         InitializeComponent()
         ' Add any initialization after the InitializeComponent() call.
     End Sub
+
+    Sub New(net As Network)
+        ' This call is required by the designer.
+        InitializeComponent()
+        network1 = net
+        ' Add any initialization after the InitializeComponent() call.
+    End Sub
     Sub createUserControl(network As Network)
         network1 = network
     End Sub
     Sub labelText(s As String)
         Label1.Text += (s & vbCrLf)
     End Sub
-    Private Sub MapEventsUserControl_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    'Private Sub MapEventsUserControl_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
+    '    If (Not (network1 Is Nothing)) Then
+    '        Dim DX, Dy As Double
+    '        DX = Network.XMAX - Network.XMIN
+    '        Dy = Network.YMAX - Network.YMIN
+
+    '        Network.XOFF = MapFrameX - MapLength * Network.XMIN / DX
+    '        Network.YOFF = MapHeight - MapFrameY + MapLength * Network.YMIN / Dy
+    '        Network.XSCALE = MapLength / DX
+    '        Network.YSCALE = -MapLength / Dy
+
+    '        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+    '        e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
+    '        e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+    '        e.Graphics.PageUnit = GraphicsUnit.Pixel
+    '        network1.draw(e.Graphics)
+    '    End If
+    'End Sub
+
+    Protected Overrides Sub OnPaint(e As PaintEventArgs)
+        MyBase.OnPaint(e)
+
         If (Not (network1 Is Nothing)) Then
             Dim DX, Dy As Double
             DX = Network.XMAX - Network.XMIN
@@ -40,6 +68,7 @@ Public Class MapEventsUserControl
             e.Graphics.PageUnit = GraphicsUnit.Pixel
             network1.draw(e.Graphics)
         End If
+
     End Sub
 
     Private Sub MapEventsUserControl_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
@@ -104,7 +133,41 @@ Public Class MapEventsUserControl
             Next
         End If
     End Sub
-    Private Sub MapEventsUserControl_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+    'Private Sub MapEventsUserControl_MouseMove(sender As Object, e As MouseEventArgs) Handles Me.MouseMove
+    '    Dim g = Me.CreateGraphics
+    '    If (network1 IsNot Nothing) Then
+    '        If (e.Button = MouseButtons.Left) And currentActivity = "nothing" Then
+    '            mousePlacement.X = (e.X - Network.XOFF) / Network.XSCALE
+    '            mousePlacement.Y = (e.Y - Network.YOFF) / Network.YSCALE
+    '            mouseDisp.X = mouseClickPosition.X - mousePlacement.X
+    '            mouseDisp.Y = mouseClickPosition.Y - mousePlacement.Y
+
+    '            Network.XMIN += mouseDisp.X
+    '            Network.XMAX += mouseDisp.X
+
+    '            Network.YMIN += mouseDisp.Y
+    '            Network.YMAX += mouseDisp.Y
+    '            Me.Invalidate()
+    '        End If
+    '        If (e.Button = MouseButtons.Left) And currentActivity = "movement" Then
+    '            mousePlacement.X = (e.X - Network.XOFF) / Network.XSCALE
+    '            mousePlacement.Y = (e.Y - Network.YOFF) / Network.YSCALE
+    '            netObj.changeNodeCoordinate(mousePlacement)
+    '            Me.Invalidate()
+    '        End If
+    '    End If
+    'End Sub
+
+    Private Sub MapEventsUserControl_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Me.MouseDoubleClick
+        If netObj IsNot Nothing AndAlso netObj.mouseOnObject(e.Location) Then
+            Dim propertyForm As New PropertyGridForm
+            propertyForm.createForm(netObj)
+        End If
+    End Sub
+
+    Protected Overrides Sub OnMouseMove(e As MouseEventArgs)
+        MyBase.OnMouseMove(e)
+
         Dim g = Me.CreateGraphics
         If (network1 IsNot Nothing) Then
             If (e.Button = MouseButtons.Left) And currentActivity = "nothing" Then
@@ -128,4 +191,6 @@ Public Class MapEventsUserControl
             End If
         End If
     End Sub
+
+
 End Class

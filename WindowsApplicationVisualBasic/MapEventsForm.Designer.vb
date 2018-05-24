@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MapEventsForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,32 +20,32 @@ Partial Class MapEventsForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.MapEventsUserControl1 = New WindowsApplicationVisualBasic.MapEventsUserControl()
+        Me.MapEventsUserControl2 = New WindowsApplicationVisualBasic.MapEventsUserControl()
         Me.SuspendLayout()
         '
-        'MapEventsUserControl1
+        'MapEventsUserControl2
         '
-        Me.MapEventsUserControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MapEventsUserControl1.Location = New System.Drawing.Point(0, 0)
-        Me.MapEventsUserControl1.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
-        Me.MapEventsUserControl1.Name = "MapEventsUserControl1"
-        Me.MapEventsUserControl1.Size = New System.Drawing.Size(669, 653)
-        Me.MapEventsUserControl1.TabIndex = 0
+        Me.MapEventsUserControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MapEventsUserControl2.Location = New System.Drawing.Point(0, 0)
+        Me.MapEventsUserControl2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MapEventsUserControl2.Name = "MapEventsUserControl2"
+        Me.MapEventsUserControl2.Size = New System.Drawing.Size(1338, 1256)
+        Me.MapEventsUserControl2.TabIndex = 0
         '
         'MapEventsForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(669, 653)
-        Me.Controls.Add(Me.MapEventsUserControl1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ClientSize = New System.Drawing.Size(1338, 1256)
+        Me.Controls.Add(Me.MapEventsUserControl2)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "MapEventsForm"
         Me.Text = "MapEventsForm"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents MapEventsUserControl1 As MapEventsUserControl
+    Friend WithEvents MapEventsUserControl2 As MapEventsUserControl
 End Class

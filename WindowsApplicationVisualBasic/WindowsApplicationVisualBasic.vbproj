@@ -13,6 +13,10 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +62,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Telerik.WinControls, Version=2018.1.220.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.GridView, Version=2018.1.220.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.UI, Version=2018.1.220.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="TelerikCommon, Version=2018.1.220.20, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -80,16 +88,34 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\GridView.Designer.vb">
+      <DependentUpon>GridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\GridView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="MapEventsForm.Designer.vb">
       <DependentUpon>MapEventsForm.vb</DependentUpon>
     </Compile>
     <Compile Include="MapEventsForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MapEventsUserControl.Designer.vb">
+    <Compile Include="UserControls\TelerikGridViewUserControls\NetObjTelerikGridView.Designer.vb">
+      <DependentUpon>NetObjTelerikGridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\NetObjTelerikGridView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\TelerikGridViewParentClass.Designer.vb">
+      <DependentUpon>TelerikGridViewParentClass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\TelerikGridViewParentClass.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MapEventsUserControl.Designer.vb">
       <DependentUpon>MapEventsUserControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="MapEventsUserControl.vb">
+    <Compile Include="UserControls\MapEventsUserControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -117,6 +143,12 @@
     <Compile Include="PropertyGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\NetworkTelerikGridView.Designer.vb">
+      <DependentUpon>NetworkTelerikGridView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TelerikGridViewUserControls\NetworkTelerikGridView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -125,9 +157,16 @@
     <EmbeddedResource Include="MapEventsForm.resx">
       <DependentUpon>MapEventsForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapEventsUserControl.resx">
+    <EmbeddedResource Include="UserControls\TelerikGridViewUserControls\GridView.resx">
+      <DependentUpon>GridView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TelerikGridViewUserControls\NetObjTelerikGridView.resx">
+      <DependentUpon>NetObjTelerikGridView.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MapEventsUserControl.resx">
       <DependentUpon>MapEventsUserControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -136,6 +175,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PropertyGridForm.resx">
       <DependentUpon>PropertyGridForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TelerikGridViewUserControls\TelerikGridViewParentClass.resx">
+      <DependentUpon>TelerikGridViewParentClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TelerikGridViewUserControls\NetworkTelerikGridView.resx">
+      <DependentUpon>NetworkTelerikGridView.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
