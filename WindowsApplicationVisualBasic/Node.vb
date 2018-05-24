@@ -6,12 +6,16 @@ Public Class Node
 
     Inherits NetworkObj
 
+    <XmlIgnore>
+    Private colour As Color = Color.Black
     Private pressure, elevation, diameter As Double
     Private xCoordinate, yCoordinate As Double
-#Region "Private Members Getters Setters"
+    Private colourCode As Int32
+
+#Region "Nodes Getters Setters"
     <XmlAttribute("nodePressure")>
     <DisplayName("Pressure")>
-    <propertySorting(3)>
+    <propertySorting(4)>
     <Description("Indicates the pressure of the node")>
     <Category("Node")>
     <Plotting>
@@ -25,7 +29,7 @@ Public Class Node
     End Property
     <XmlAttribute("nodeElevation")>
     <DisplayName("Elevation")>
-    <propertySorting(4)>
+    <propertySorting(5)>
     <Description("Indicates the elevation of the node")>
     <Category("Node")>
     Public Property nodeElevation() As Double
@@ -38,7 +42,7 @@ Public Class Node
     End Property
     <XmlAttribute("nodeDiameter")>
     <DisplayName("Diameter")>
-    <propertySorting(5)>
+    <propertySorting(6)>
     <Description("Indicates the diamter of the node")>
     <Category("Node")>
     Public Property nodeDiameter() As Double
@@ -51,7 +55,7 @@ Public Class Node
     End Property
     <XmlAttribute("nodeXCoordinate")>
     <DisplayName("xCoordinate")>
-    <propertySorting(6)>
+    <propertySorting(7)>
     <Description("Indicates the x-Coordinate of the node")>
     <Category("Node")>
     Public Property nodeXCoordinate() As Int32
@@ -63,7 +67,7 @@ Public Class Node
         End Set
     End Property
     <XmlAttribute("nodeYCoordinate")>
-    <propertySorting(7)>
+    <propertySorting(8)>
     <DisplayName("yCoordinate")>
     <Description("Indicates the y-Coordinate of the node")>
     <Category("Node")>
@@ -75,19 +79,50 @@ Public Class Node
             yCoordinate = value
         End Set
     End Property
+
+
+    <XmlAttribute("nodeColour")>
+    <DisplayName("Colour")>
+    <propertySorting(9)>
+    <Description("Indicates the color of the node")>
+    <Category("Node")>
+    Public Property nodeColour() As Int32
+        Get
+            Return colour.ToArgb
+        End Get
+        Set(ByVal value As Int32)
+            colour = Color.FromArgb(value)
+        End Set
+    End Property
+
+    <XmlIgnore>
+    <DisplayName("Color")>
+    <propertySorting(10)>
+    <Description("Indicates the color of the node")>
+    <Category("Node")>
+    Public Property nodeColor() As Color
+        Get
+            Return colour
+        End Get
+        Set(ByVal value As Color)
+            colour = value
+        End Set
+    End Property
 #End Region
 
     Public Sub New()
     End Sub
-    Public Sub New(node_name As String, node_nr As Int32, node_flowRate As Double, node_pressure As Double, node_xCoordinate As Int32, node_yCoordinate As Int32, node_elevation As Double)
+    Public Sub New(node_name As String, node_nr As Int32, node_flowRate As Double, bool As Boolean, node_pressure As Double, node_xCoordinate As Int32, node_yCoordinate As Int32, node_elevation As Double, clr As Color)
         Me.NetObjName = node_name
         Me.NetObjNr = node_nr
         Me.NetObjFlowRate = node_flowRate
+        Me.NetObjVisibility = bool
         pressure = node_pressure
         xCoordinate = node_xCoordinate
         yCoordinate = node_yCoordinate
         elevation = node_elevation
         diameter = 20
+        colour = clr
     End Sub
     Function getDispCoor() As Point
         Return Network.GEOToDSP(New Point(xCoordinate, yCoordinate))

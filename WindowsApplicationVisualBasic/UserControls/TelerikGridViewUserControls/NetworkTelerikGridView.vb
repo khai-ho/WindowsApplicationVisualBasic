@@ -51,7 +51,6 @@ Public Class NetworkTelerikGridView
                 widthView2 = determineColWidth(RadGridView2)
 
                 If widthView1 > widthView2 Then
-                    MessageBox.Show(ParentForm.Height)
                     Me.ParentForm.Size = New Size(widthView1 + 60, 1000)
                 Else
                     Me.ParentForm.Size = New Size(widthView2 + 60, 1000)

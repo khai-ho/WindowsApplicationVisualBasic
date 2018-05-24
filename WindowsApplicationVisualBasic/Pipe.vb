@@ -3,15 +3,20 @@ Imports System.Xml.Serialization
 
 Public Class Pipe
     Inherits NetworkObj
-
+    Public Enum Severity
+        Bad = 0
+        Average = 1
+        Good = 2
+    End Enum
     <XmlIgnore>
     Public fromNode, toNode As Node
     Private length, diameter, roughness, slope As Double
     Private fromNodeName, toNodeName As String
+    Private condition As Severity = 1
 #Region "Pipes Getters & Setters"
     <XmlAttribute("pipeLength")>
     <DisplayName("Length")>
-    <propertySorting(5)>
+    <propertySorting(6)>
     <Description("Indicates the length of the pipe")>
     <Category("Pipe")>
     Public Property pipeLength() As Double
@@ -24,7 +29,7 @@ Public Class Pipe
     End Property
     <XmlAttribute("pipeDiameter")>
     <DisplayName("Diameter")>
-    <propertySorting(6)>
+    <propertySorting(7)>
     <Description("Indicates the diameter of the pipe")>
     <Category("Pipe")>
     Public Property pipeDiameter() As Double
@@ -37,7 +42,7 @@ Public Class Pipe
     End Property
     <XmlAttribute("pipeRoughness")>
     <DisplayName("Roughness")>
-    <propertySorting(7)>
+    <propertySorting(8)>
     <Description("Indicates the roughness of the pipe")>
     <Category("Pipe")>
     Public Property pipeRoughness() As Double
@@ -50,7 +55,7 @@ Public Class Pipe
     End Property
     <XmlAttribute("pipeSlope")>
     <DisplayName("Slope")>
-    <propertySorting(8)>
+    <propertySorting(9)>
     <Description("Indicates the slope of the pipe")>
     <Category("Pipe")>
     Public Property pipeSlope() As Double
@@ -61,9 +66,22 @@ Public Class Pipe
             slope = value
         End Set
     End Property
+    <XmlAttribute("pipeCondition")>
+    <DisplayName("Condition")>
+    <propertySorting(10)>
+    <Description("Indicates the condition of the pipe")>
+    <Category("Pipe")>
+    Public Property pipeCondition() As Severity
+        Get
+            Return condition
+        End Get
+        Set(ByVal value As Severity)
+            condition = value
+        End Set
+    End Property
     <XmlAttribute("pipeFromNodeName")>
     <DisplayName("FromNode")>
-    <propertySorting(3)>
+    <propertySorting(4)>
     <Description("Indicates the from which node the pipe is connected to")>
     <Category("Pipe")>
     Public Property pipeFromNodeName() As String
@@ -82,7 +100,7 @@ Public Class Pipe
     End Property
     <XmlAttribute("pipeToNodeName")>
     <DisplayName("ToNode")>
-    <propertySorting(4)>
+    <propertySorting(5)>
     <Description("Indicates the to which node the pipe is connected to")>
     <Category("Pipe")>
     Public Property pipeToNodeName() As String
@@ -100,16 +118,18 @@ Public Class Pipe
 #End Region
     Public Sub New()
     End Sub
-    Public Sub New(pipe_name As String, pipe_nr As Int32, pipe_flowRate As Double, pipe_fromNode As Node, pipe_toNode As Node, pipe_length As Double, pipe_diameter As Double, pipe_roughness As Double, pipe_slope As Double)
+    Public Sub New(pipe_name As String, pipe_nr As Int32, pipe_flowRate As Double, bool As Boolean, pipe_fromNode As Node, pipe_toNode As Node, pipe_length As Double, pipe_diameter As Double, pipe_roughness As Double, pipe_slope As Double, cond As Severity)
         Me.NetObjName = pipe_name
         Me.NetObjNr = pipe_nr
         Me.NetObjFlowRate = pipe_flowRate
+        Me.NetObjVisibility = bool
         fromNode = pipe_fromNode
         toNode = pipe_toNode
         length = pipe_length
         diameter = pipe_diameter
         roughness = pipe_roughness
         slope = pipe_slope
+        condition = cond
     End Sub
     Sub Link2Nodes(nodes As IEnumerable(Of Node))
         Dim lmbFrom = Function(x) x.NetObjName().ToLower = fromNodeName.ToLower

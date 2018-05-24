@@ -1,4 +1,5 @@
 ﻿Imports Telerik.WinControls.UI
+Imports Telerik.WinControls.Data
 Public MustInherit Class TelerikGridViewParentClass
 
     Public Sub New()
@@ -13,12 +14,30 @@ Public MustInherit Class TelerikGridViewParentClass
         Dim attlist As List(Of propertySortingAttribute) = netObject.getPropSortAttrlist(netObject)
         attlist.Sort(Function(x As propertySortingAttribute, y As propertySortingAttribute) x.SortCode.CompareTo(y.SortCode))
         For Each att In attlist
-            Dim gridViewDataColumns As New GridViewTextBoxColumn
-            gridViewDataColumns.FieldName = att.PropInfo.Name
-            gridViewDataColumns.Name = att.PropInfo.Name
-            gridViewDataColumns.HeaderText = att.DisplayName
+            If att.PropInfo.PropertyType = GetType(Boolean) Then
+                Dim gridViewDataColumns As New GridViewCheckBoxColumn
+                gridViewDataColumns.FieldName = att.PropInfo.Name
+                gridViewDataColumns.HeaderText = att.DisplayName
+                gridView.Columns.Add(gridViewDataColumns)
+            ElseIf att.PropInfo.PropertyType.IsEnum Then
+                Dim gridViewDataColumns As New GridViewComboBoxColumn
+                gridViewDataColumns.DataSource = [Enum].GetValues(att.PropInfo.PropertyType)
+                gridViewDataColumns.FieldName = att.PropInfo.Name
+                gridViewDataColumns.HeaderText = att.DisplayName
+                gridView.Columns.Add(gridViewDataColumns)
+            ElseIf att.DisplayName = "Colour" Then
 
-            gridView.Columns.Add(gridViewDataColumns)
+            ElseIf att.PropInfo.PropertyType = GetType(Color) Then
+                Dim gridViewDataColumns As New GridViewColorColumn
+                gridViewDataColumns.FieldName = att.PropInfo.Name
+                gridViewDataColumns.HeaderText = att.DisplayName
+                gridView.Columns.Add(gridViewDataColumns)
+            Else
+                Dim gridViewDataColumns As New GridViewTextBoxColumn
+                gridViewDataColumns.FieldName = att.PropInfo.Name
+                gridViewDataColumns.HeaderText = att.DisplayName
+                gridView.Columns.Add(gridViewDataColumns)
+            End If
         Next
     End Sub
 

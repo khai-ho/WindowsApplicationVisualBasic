@@ -7,6 +7,21 @@ Public MustInherit Class NetworkObj
     Private name As String
     Private nr As Int32
     Private flowRate As Double
+    Private isVisibile As Boolean = True
+
+    <XmlAttribute("NetObjVisibility")>
+    <DisplayName("Show")>
+    <propertySorting(3)>
+    <Description("Indicates whether the object is to be shown")>
+    <Category("Network Object")>
+    Public Property NetObjVisibility() As Boolean
+        Get
+            Return isVisibile
+        End Get
+        Set(ByVal value As Boolean)
+            isVisibile = value
+        End Set
+    End Property
 
     <XmlAttribute("NetObjName")>
     <DisplayName("Name")>

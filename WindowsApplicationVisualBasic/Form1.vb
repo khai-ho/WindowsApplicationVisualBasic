@@ -26,7 +26,6 @@ Public Class Form1
             Dim xmlWriter As New XmlSerializer(network1.GetType())
             xmlWriter.Serialize(serialWriter, network1)
             serialWriter.Close()
-            'MessageBox.Show("Saved")
         End If
     End Sub
 
@@ -41,25 +40,23 @@ Public Class Form1
         network1.setNetworkFrame()
         network1.setColor(Color.Black)
         Map.Invalidate()
-        'MessageBox.Show("Loaded")
         readStream.Close()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         Dim nodes = New List(Of Node) From {
-            New Node("name1", 1, 3.3, 4.4, 100, 100, 0),
-            New Node("name2", 2, 3.3, 4.4, 200, 200, 0),
-            New Node("name3", 3, 3.3, 4.4, 300, 100, 0)
+            New Node("name1", 1, 3.3, True, 4.4, 100, 100, 0, Color.AliceBlue),
+            New Node("name2", 2, 3.3, True, 4.4, 200, 200, 0, Color.AntiqueWhite),
+            New Node("name3", 3, 3.3, True, 4.4, 300, 100, 0, Color.Aqua)
         }
         Dim pipes = New List(Of Pipe) From {
-            New Pipe("pipe1", 1, 2.2, nodes(0), nodes(2), 80, 600, 0.012, 3.3),
-            New Pipe("pipe2", 2, 2.2, nodes(0), nodes(1), 90, 600, 0.012, 3.3),
-            New Pipe("pipe3", 3, 2.2, nodes(1), nodes(2), 100, 600, 0.012, 3.3)
+            New Pipe("pipe1", 1, 2.2, True, nodes(0), nodes(2), 80, 600, 0.012, 3.3, 0),
+            New Pipe("pipe2", 2, 2.2, False, nodes(0), nodes(1), 90, 600, 0.012, 3.3, 1),
+            New Pipe("pipe3", 3, 2.2, False, nodes(1), nodes(2), 100, 600, 0.012, 3.3, 2)
         }
         network1 = New Network("network1", nodes, pipes)
         network1.setNetworkFrame()
-        'MessageBox.Show("Original")
         Map.Invalidate()
     End Sub
 
